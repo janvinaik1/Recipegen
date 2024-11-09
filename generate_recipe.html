@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Recipes by Ingredients</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://i.pinimg.com/564x/65/28/1d/65281dd61de56b280dc0aee8e525b5aa.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: black; /* Custom orange color */
+        }
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .btn-custom {
+            width: 100%;
+            padding: 10px;
+            background-color: #FF6500; /* Custom orange color */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn-custom:hover {
+            background-color: #002245; /* Custom blue color on hover */
+        }
+        p.error {
+            color: red;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Find Recipes by Ingredients</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="ingredients">Ingredients (comma-separated):</label>
+        <input type="text" id="ingredients" name="ingredients" placeholder="e.g., apples,flour,sugar" required>
+        
+        <label for="time">Max Cooking Time (minutes):</label>
+        <input type="number" id="time" name="time" min="1" placeholder="e.g., 30">
+
+        <label for="servings">Number of Servings:</label>
+        <input type="number" id="servings" name="servings" min="1" placeholder="e.g., 4">
+
+        <label for="cuisine">Cuisine Type:</label>
+        <input type="text" id="cuisine" name="cuisine" placeholder="e.g., Italian, Mexican">
+
+        <button type="submit" class="btn-custom">Find Recipes</button>
+    </form>
+    
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+</body>
+</html>
